@@ -1,0 +1,19 @@
+.homeImages {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-gap: 40px;
+  &--content{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      grid-row-gap: 20px;
+      &--title{
+          font-size: 20px;
+          font-weight: 500;
+      }
+  }
+}

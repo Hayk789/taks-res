@@ -1,0 +1,16 @@
+.homeDatalimit{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    button{
+        padding: 15px 20px;
+        border-radius: 10px;
+        background: purple;
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+    }
+}
