@@ -1,35 +1,37 @@
-import { memo, useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setCategory } from "../../redux/feauthers/home/homeSlise";
-
-export type categoryType = {
-  id: number;
-  name: string;
-};
+import {
+  GetCategoryData,
+  setCategory,
+} from "../../redux/feauthers/home/homeSlise";
+import { useAppSelector } from "../../redux/hook";
 
 const HomeCategories = () => {
-  const [category, setCategorys] = useState([]);
   const dispatch = useDispatch();
+  const { category } = useAppSelector(({ homeReducer }) => ({
+    category: homeReducer.data.category,
+  }));
   useEffect(() => {
-    axios
-      .get("https://api.thecatapi.com/v1/categories")
-      .then((res: any) => setCategorys(res.data));
-  }, []);
-  console.log(category);
+    dispatch(GetCategoryData());
+  }, [dispatch]);
+
+  const onChangeHandler = (e: any) => {
+    const index = e.target.selectedIndex;
+    const el = e.target.childNodes[index];
+    const option = el.getAttribute("id");
+    dispatch(setCategory(option));
+  };
 
   return (
     <div className="Category">
-      <select name="Category" id="">
-        {category.map(({ name, id }) => {
-          return (
-            <option  key={id} onClick={()  =>  dispatch(setCategory(id))}>
-              {name}
-            </option>
-          );
-        })}
+      <select name="Category" id="" onChange={onChangeHandler}>
+        {category.map(({ name, id }) => (
+          <option key={id} id={`${id}`}>
+            {name}
+          </option>
+        ))}
       </select>
     </div>
   );
 };
-export default memo(HomeCategories);
+export default HomeCategories;
